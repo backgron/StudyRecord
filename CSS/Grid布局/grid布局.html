@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 500px;
+      background-color: #ccc;
+    }
+
+    .grid_box {
+      display: grid;
+      width: 300px;
+      height: 300px;
+      background-color: skyblue;
+      grid-template-columns: 50px 50px 50px;
+      grid-template-rows: repeat(3, 50px);
+
+      justify-content: center;
+      align-content: center;
+    }
+
+    .item {
+      background-color: #ccc;
+    }
+
+    .item1 {
+      background-color: red;
+      grid-row-start: 1;
+      grid-row-end: 3;
+    }
+
+    .item2 {
+      background-color: yellow;
+      grid-column: 2 / 4;
+    }
+
+    .item3 {
+      background-color: blue;
+    }
+
+    .item4 {
+      background-color: green;
+    }
+
+    .item5 {
+      background-color: bisque;
+    }
+
+    .item6 {
+      background-color: brown;
+    }
+
+    .item7 {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="grid_box">
+      <div class="item item1"></div>
+      <div class="item item2"></div>
+      <div class="item item3"></div>
+      <div class="item item4"></div>
+      <div class="item item5"></div>
+      <div class="item item6"></div>
+      <div class="item item7"></div>
+    </div>
+  </div>
+</body>
+
+</html>

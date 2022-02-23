@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    `  AJAX  Asynchronous JavaScript And XML
+  1、在不重新加载页面的情况下发送请求给服务器
+  2、接受并使用服务器发来的数据
+`
+
+    // 1. 创建 XMLHttpRequest 对象
+    let httpRequest = new XMLHttpRequest()
+
+    // 2设置参数
+    httpRequest.open('GET', 'https://www.baidu.com/')
+
+    // 3发送请求
+    httpRequest.send()
+
+    //4. 当状态改变时  判断当前状态  设置处理结果方法
+    httpRequest.onreadystatechange = function () {
+      if (httpRequest.readyState === 4) {
+        if (httpRequest.status === 200) {
+          console.log(httpRequest.responseText)
+        } else {
+          console.log('失败')
+        }
+      }
+    }
+
+
+    // 用promise 封装ajax
+    const ajax = ({
+      method,
+      path,
+      body,
+      headers
+    }) => {
+      return new Promise((resolve, reject) => {
+        let httpRequest = new XMLHttpRequest()
+        httpRequest.open(method, path)
+        for (const key in headers) {
+          let value = headers[key]
+          httpRequest.setRequestHeader(key, value)
+        }
+        httpRequest.send(body)
+
+        httpRequest.onreadystatechange = () => {
+          if (httpRequest.readyState === 4) {
+            if (httpRequest.status >= 200 && httpRequest.status < 400) {
+              resolve.call(undefined, httpRequest.responseText)
+            } else if (httpRequest.status >= 400) {
+              reject.call(undefined, httpRequest)
+            }
+          }
+        }
+
+      })
+    }
+  </script>
+</body>
+
+</html>
