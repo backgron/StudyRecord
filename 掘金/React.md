@@ -292,11 +292,80 @@ if(true){
 + 内联样式属性添加的内联样式为JavaScript对象，需要被先转换为等效的CSS样式规则，然后应用到元素，涉及到脚本执行的开销。
 + 最好将CSS文件导入，能通过CSS做的事情就不要用JS做，JS操作DOM开销更大一点。
 
+### key 优化
+
++ 给列表或者变动的组件元素加上key值，可以优化更新速度。
+
 ## Fiber
 
-## 组件通讯 & 状态管理  ！！
+## 数据通讯 & 状态管理  
 
-## 高阶租价 HOC ！！
+### 父组件传递给子组件
+
+1. 通过`props`传递
+2. 多层嵌套时通过`context`传递
+
+### 子组件向父组件传值
+
+1. `render props`
+
+   ```jsx
+   // 父组件通过props将封装好的对象传给子组件
+   <Child cb={callback}/>
+   // 子组件调用传入的方法，将需要传递的值通过callback传参形式传回
+   cb(args)
+   ```
+
+2. 状态提升
+
+   ```jsx
+   const [args,setArgs] = useState();
+   <Child args={args} setArgs={setArgs}/>
+   //子组件通过setArgs改变args传递值
+   ```
+
+### 兄弟传值
+
+1. 以父组件为介质传递
+2. 以父组件为介质进行状态提升
+
+### Redux & useReducer
+
++ 基本概念
+
+  1. Store对象：包含所有数据，是一个容器，整个应用只能由一个Stroe
+  2. State对象：包含所有数据，如果想得到某个时点的数据，就要对Store生成快照，这种时点的数据集合就叫做State
+  3. Action对象：State的变化会导致View的变化，但是用户接触不到State，只能接触到View，State的变化必须是View导致的，Action就是View发出的通知。表示State应该要发生变化了。
+  4. dispatch方法：是View发出Action的唯一方法。
+  5. reducer方法：Store收到Action以后必须给出一个新的State，这样View才会发生变化，这种State的计算过程就是reducer
+
++ 基本流程：
+
+  1. 创建`Stroe`
+  2. 创建`action`
+  3. 创建`reducer`
+  4. 通过`dispatch`发送`action`
+  5. `Store`调用`reducer`并传入当前`state`和收到的`action`
+  6. `reducer`返回新的`state`
+  7. 通过`Stroe.getState()`获取状态(`state`)
+
++ 其他
+
+  1. 使用`useReducer()`不需要手动管理store
+
+     ```jsx
+     const [state,dispatch]=useReducer(reducer,initialState,init)
+     ```
+
+  2. redux中的`connect`方法允许我们将`store`中的数据作为`props`绑定到组件上
+
+     ```jsx
+     connect([mapStateToProps],[mapDispatchToProps],[mergeProps],[options])
+     ```
+
+## 高阶组件HOC 
+
+
 
 ## React.memo ！！
 
@@ -304,13 +373,64 @@ if(true){
 
 ## 渲染流程 ！！
 
-## 虚拟DOM & DIFF 算法 ！！
+## 虚拟DOM & DIFF 算法 
 
-## Key的作用 ！！
++ 虚拟DOM：React元素（普通对象/JSX）
++ 虚拟DOM树：React元素组成的树形结构
+
+### 协调
+
++ 在`state`和`props`更新时，`render()`方法会返回一个和原来不同的虚拟DOM树，React基于这两个树的差别来判断如何更有效率的更新真实的DOM树（UI）
++ 原则：
+  1. 两个不同类型的袁术会产生出不同的DOM树
+  2. 可以通过key prop 来暗示那些子元素在不同的渲染下能保持稳定。
+
+### DIFF算法
+
++ **对比不同类型的元素**
+
+  + 当根节点为不同类型的React元素时，React会卸载原有的树，并建立了新的树。
+  + 如：`<a>`变成`<img>` 或者组件 `<Button>`变为`<Input>`
+  + 当卸载原有的树的时对应的真实DOM节点也会被卸载，组件执行`componentWillUnmount()`方法，所有关联的`state`也会被销毁。
+  + 当建立一棵新的树时，对应的节点会被插入到真实的DOM中。组件执行`componentWillMount()`方法，之后执行`componentDidMount()`方法。
+
++ **对比同一类型的元素**
+
+  + 当对比两个相同类型的React元素时，React会保留DOM节点，仅仅对比对更新有改变的属性。
+
+    ```jsx
+    <div className='before' title='stuff'></div>
+    <div className='after' title='stuff'></div>
+    //通过对比 React只会修改对应的className属性，style样式也一样
+    ```
+
++ **对比同一类型的组件元素**
+
+  + 当一个组件更新时，组件实例保持不变，这样`state`在跨越不同的渲染时保持一致。React将更新该组件实例的`props`以跟最新的元素保持一致
+  + 调用组件的render()方法，递归以上的过程。
+
++ **对子节点进行递归**
+
+  + 在默认条件下，递归DOM节点子元素时，React会同时遍历两个子元素列表，产生差异时生成一个`mutation`
+  + 在子元素列表尾部新增元素时开销较小。React会先匹配前面元素对应的树，然后插入元素。
+  + 在子元素头部插入的话开销比较大。React会对每一个子元素`mutate`，并替换所有的子元素。
+  + 通过给子元素绑定`key`可以让React知道子元素是变化还是移动
+
+## Key的作用 
+
++ 当子元素拥有`key`时，React使用`key`来匹配原有树上的子元素。
++ 头部插入节点将变得高效起来
++ `key`需要在**同级**保持唯一
++ 使用`index`作为`key`的话，在元素不进行重新排序时比较合适，如果一旦修改顺序，DIFF就会变得很慢
++ 当基于下标的组件进行排序时，组件实例是基于他们的`key`决定是否更新，修改顺序后回到是非受控组件的`state`（比如输入框）可能会相互篡改。
 
 ## Refs & DOM
 
 ## JSX
+
++ JSX是JavaScript的语法扩展，可以很好的描述UI。
++ JSX可以防止注入攻击（XSS）
++ Babel会把JSX翻译成`React.createElement()`函数。
 
 ## Portals
 
