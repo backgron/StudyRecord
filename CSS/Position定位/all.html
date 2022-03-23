@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father{
+      height: 1000px;
+      width: 300px;
+      margin:0 auto;
+      background-color: #ccc;
+    }
+    .relativeSon{
+      width: 150px;
+      height: 100px;
+      background-color: green;
+      position:relative;
+      top:10px;
+      left:30px;
+      padding:5px;
+    }
+    .absoluteSon{
+      width: 150px;
+      height: 100px;
+      background-color: pink;
+      position:absolute;
+      left:30px;
+      padding:5px;
+    }
+    .fixedSon{
+      width: 150px;
+      height: 100px;
+      background-color: red;
+      position:fixed;
+      top:40px;
+      left:10px;
+      padding:5px;
+    }
+    .stickySon{
+      width: 150px;
+      height: 100px;
+      background-color: skyblue;
+      position:sticky;
+      top:100px;
+      padding:5px;
+    }
+    .nothingSon{
+      width: 150px;
+      height:100px;
+      background-color: yellow;
+      padding:5px;
+    }
+    span{
+      font-size: 12px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="father">
+    <h3>father</h3>
+    <div class="relativeSon">
+      position:relative;<br>
+      top:10px;<br>
+      left:30px;<br>
+      <span>相对于自己</span>
+    </div>
+    <div class="absoluteSon">
+      position:absolute;<br>
+      left:30px;<br>
+     <span>相对于上一个relative
+      或者viewport</span>
+    </div>
+    <div class="fixedSon">
+      position:fixed;<br>
+      top:40px;<br>
+      left:10px;<br>
+      <span>相对于viewport</span>
+    </div>
+    <div class="stickySon">
+      position:sticky;<br>
+      top:80px;<br>
+      <span>类似absolute + fixed</span>
+    </div>
+    <div class="nothingSon">
+      nothingSon<br>
+      <span>文档流</span>
+    </div>
+  </div>
+</body>
+</html>
