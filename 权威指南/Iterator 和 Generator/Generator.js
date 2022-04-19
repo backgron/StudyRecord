@@ -2,7 +2,7 @@
 //   Genertor 是 ES6 提供的一种异步编程解决方案
 //   Generator 是一个状态机 ，可以返回一个遍历器对象(Iterator)
 //   可以把 Generator 赋值给 Symbol.iterator 属性
-//   Gererator 中的this 不知想Generator函数  可以使用 f = F.call(F.prototype)  
+//   Gererator 中的this 不指向Generator函数  可以使用 f = F.call(F.prototype)  
 // `
 
 // //基本使用
