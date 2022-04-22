@@ -1,5 +1,3 @@
-<!-- @format -->
-
 # window.postMessage
 
 - 实现两个页面之间传递信息 （可以限制域名端口等） 如 A 页面打开 B 页面 或者 A 页面中存在 iframe B 页面
@@ -8,3 +6,4 @@
 
 - 注意安全问题 详见 MDN
   - [window.postMessage - Web API 接口参考 | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage#see_also)
+
