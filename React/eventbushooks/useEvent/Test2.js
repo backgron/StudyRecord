@@ -1,5 +1,3 @@
-/** @format */
-
 import { useState } from "react"
 import { useEvent } from "../hooks/useEvent"
 import Child2 from "./child2"

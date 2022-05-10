@@ -1,5 +1,3 @@
-/** @format */
-
 import { useRef, useEffect } from "react"
 
 class EventBus {
