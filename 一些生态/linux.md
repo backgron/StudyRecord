@@ -130,7 +130,7 @@ df [-a..] dir/fileName
 - **-k** ：以 KBytes 列出容量显示；
 - **-m** ：以 MBytes 列出容量显示；
 
-## 分享
+## 参考文章
 
 狂神说微信公众号：https://mp.weixin.qq.com/s/RT93qJdTagtKjWKx_A_6Nw
 
