@@ -24,7 +24,7 @@
   -it				#使用交互方式运行（进入容器内）
   -p 主机端口:容器端口 #指定容器的端口映射
   -P 				 #随机指定端口
-  
+  -v 主机端口:容器端口 #指定容器数据卷，绑定文件
   ```
 
 + **exit** 退出容器
@@ -63,15 +63,31 @@
 + **docker attach** 进入容器正在进行的终端
 
   ```shell
-  docker exec 容器id
+  docker attach 容器id
   ```
 
 ## 其他命令
 
 + **docker logs** 查看日志
+
 + **docker top** 容器id 查看进程信息
+
 + **docker inspect 容器id** 查看元数据
+
 + **docker cp 容器id:容器内路径 目的主机路径** 拷贝容器的文件到主机中（在主机操作）
+
++ **docker commit [options] [容器id] [ImageName:Tag]** 打包一个镜像
+
+  ```shell
+  -a #作者
+  -c #使用Dockerfile指令创建镜像
+  -m #提交时的说明文字
+  -p #在commit时，将容器暂停
+  ```
+
++ **docker volume --help** 查看卷相关命令
+
++ **docker build** 构建一个镜像
 
 ### 参考文章
 
