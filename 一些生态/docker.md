@@ -89,6 +89,29 @@
 
 + **docker build** 构建一个镜像
 
++ **docker --volume-from** 将多个容器的文件关联起来
+
+## Dockerfile
+
+```dockerfile
+FROM centos # 指定基础镜像
+MAINTAINER backgron<backgron@163.com> # 作者
+RUN yum install vim # 构建时候需要运行的命令
+ADD xxx # 将本地文件添加到容器中
+WORKDIR /usr/local # 镜像的工作目录
+VOLUME ['vol'] # 挂载目录
+EXPOSE 80 # 暴露的端口
+CMD /bin/bash # 指定容器启动时执行的命令 只有最后一个生效
+ENTRYPOINT /bin/bash # 指定容器启动时执行的命令，可以追加
+ONBUILD xxx # 当构建一个被继承Dockerfile 这个时候就回运行ONBUILD
+COPY nginx.conf /etc/nginx/config # 添加本地文件
+ENV MYPATH /etc/nginx # 构建的时候设置环境变量
+```
+
+
+
+
+
 ### 参考文章
 
 [Docker基础篇_霸气小闫的博客-CSDN博客](https://blog.csdn.net/Mr_YanMingXin/article/details/119504925)
