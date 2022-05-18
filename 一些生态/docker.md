@@ -19,12 +19,12 @@
 + docker run [options]  image 运行容器
 
   ```shell
-  --name='名称'    #指定容器名称
-  -d			    #后台运行
-  -it				#使用交互方式运行（进入容器内）
-  -p 主机端口:容器端口 #指定容器的端口映射
-  -P 				 #随机指定端口
-  -v 主机端口:容器端口 #指定容器数据卷，绑定文件
+  --name='名称'    # 指定容器名称
+  -d			    # 后台运行
+  -it				# 使用交互方式运行（进入容器内）
+  -p 主机端口:容器端口 # 指定容器的端口映射
+  -P 				 # 随机指定端口
+  -v 主机端口:容器端口 # 指定容器数据卷，绑定文件
   ```
 
 + **exit** 退出容器
@@ -32,18 +32,18 @@
 + **dockers ps [options]** 列出容器
 
   ```shell
-  dockers ps  #列出正在运行容器
-  -a	#列出所有容器的运行记录
-  -n=[number]  #列出最近的n个容器
-  -q		#只显示容器ID
+  dockers ps  # 列出正在运行容器
+  -a	# 列出所有容器的运行记录
+  -n=[number]  # 列出最近的n个容器
+  -q		# 只显示容器ID
   ```
 
 + **docker rm [options] 容器id** 删除指定容器
 
   ```shell
-  -f #强制删除
-  docker rm -f $(docker ps -aq) #删除所有容器
-  docker ps -a -q|xargs docker rm #删除所有容器
+  -f # 强制删除
+  docker rm -f $(docker ps -aq) # 删除所有容器
+  docker ps -a -q|xargs docker rm # 删除所有容器
   ```
 
 + **docker start 容器id** 启动容器
@@ -79,17 +79,17 @@
 + **docker commit [options] [容器id] [ImageName:Tag]** 打包一个镜像
 
   ```shell
-  -a #作者
-  -c #使用Dockerfile指令创建镜像
-  -m #提交时的说明文字
-  -p #在commit时，将容器暂停
+  -a # 作者
+  -c # 使用Dockerfile指令创建镜像
+  -m # 提交时的说明文字
+  -p # 在commit时，将容器暂停
   ```
 
 + **docker volume --help** 查看卷相关命令
 
-+ **docker build** 构建一个镜像
++ xxxxxxxxxx //定义数据表（集合的）映射   字段名和数据库保持一致var stuSchema = mongoose.Schema({  name: {    type:String,    maxlength:10,   //最大长度    minlength:2,    //最小长度    match:/^zh(.*)/i,    //正则，以zh开头    require:true   //必须  },  age: {    type:Number,    max:100,     //最大值（只能在Number)    min:0,      //最小值（只能在Number)    validate:function(age){    //自定义数据校验规则        return age % 2 === 0    }  },  status: {    type: Number,    default: "success",   //默认值    enum:[    //结果枚举 只能为 ‘success'或者'error'  (只能在String)        "success",        "error"    ]  }})js
 
-+ **docker --volume-from** 将多个容器的文件关联起来
++ **docker --volume-from** 数据卷容器，从另一个容器当中挂载容器中已经创建好的数据卷
 
 ## Dockerfile
 
@@ -108,11 +108,37 @@ COPY nginx.conf /etc/nginx/config # 添加本地文件
 ENV MYPATH /etc/nginx # 构建的时候设置环境变量
 ```
 
+## 镜像发布与下载
 
++ **docker login -u username -p** 登录
++ **docker logout** 退出
++ **docker pull 镜像名** 下载
++ **docker push 镜像名** 发布
 
+## Docker网络
 
++ **docker0** 默认网络
 
-### 参考文章
++ **docker network ** 网络相关
+
+  ```shell
+  connect # 将容器连接到网络
+  disconnect # 
+  inspect [网络名/网络ID] # 详情
+  ls # 展示网络信息
+  create # 创建一个自定义网络
+  	--driver bridge  # 指定bridge驱动程序来管理网络
+  	--subnet 192.168.0.0/16 # 指定网段的CIDR格式的子网
+  	--gatway 192.168.0.1 # 指定主子网的IPv4或IPv6网关
+  ```
+
++ **docker run --net 网络名**创建容器时指定网络
+
+  ```shell
+  docker run --net 
+  ```
+
+## 参考文章
 
 [Docker基础篇_霸气小闫的博客-CSDN博客](https://blog.csdn.net/Mr_YanMingXin/article/details/119504925)
 
