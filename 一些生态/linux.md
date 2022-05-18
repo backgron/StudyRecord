@@ -65,7 +65,7 @@
 - **tac** 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！
 - **nl**  显示的时候，顺道输出行号！
 - **more** 一页一页的显示文件内容
-- **less** 与 more 类似，但是比 more 更好的是，他可以往前翻页！
+- **less** 与 `more` 类似，但是比 `more` 更好的是，他可以往前翻页！
 - **head** 只看头几行
 - **tail** 只看尾巴几行
 
@@ -76,7 +76,7 @@
 
 ## Vim 基本用法
 
-+ **vim filename**  通过vim打开文件
++ **vim filename**  通过`vim`打开文件
 + **esc键**  切换命令模式/输入模式
 
 ### 命令模式
@@ -107,53 +107,75 @@
 - **df** ：列出文件系统的整体磁盘使用量
 - **du**：检查磁盘空间使用量
 
-## df
+### df
 
 ``` shell
 df [-a..] dir/fileName
 ```
 
-- **-a** ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；
-- **-k** ：以 KBytes 的容量显示各文件系统；
-- **-m** ：以 MBytes 的容量显示各文件系统；
-- **-h** ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；
-- **-H** ：以 M=1000K 取代 M=1024K 的进位方式；
-- **-T** ：显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；
-- **-i** ：不用硬盘容量，而以 inode 的数量来显示
+- **-a** ：列出所有的文件系统，包括系统特有的 `/proc` 等文件系统；
+- **-k** ：以 `KBytes` 的容量显示各文件系统；
+- **-m** ：以 `MBytes` 的容量显示各文件系统；
+- **-h** ：以人们较易阅读的 `GBytes`, `MBytes`, `KBytes` 等格式自行显示；
+- **-H** ：以 `M=1000K` 取代 `M=1024K` 的进位方式；
+- **-T** ：显示文件系统类型, 连同该 `partition` 的 `filesystem` 名称 (例如 `ext3`) 也列出；
+- **-i** ：不用硬盘容量，而以 `inode` 的数量来显示
 
 ### du
 
 - **-a** ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。
 - **-h** ：以人们较易读的容量格式 (G/M) 显示；
 - **-s** ：列出总量而已，而不列出每个各别的目录占用容量；
-- **-S** ：不包括子目录下的总计，与 -s 有点差别。
-- **-k** ：以 KBytes 列出容量显示；
-- **-m** ：以 MBytes 列出容量显示；
+- **-S** ：不包括子目录下的总计，与 `-s` 有点差别。
+- **-k** ：以 `KBytes` 列出容量显示；
+- **-m** ：以 `MBytes` 列出容量显示；
+
+## 网络/端口
+
+### 网络
+
++ **ip addr** 查看`ip`和`网卡`
++ **ifconfig** 用于查看和更改网络接口的地址和参数，包括IP地址、网络掩码、广播地址，使用权限是超级用户
+
+### 端口
+
++ **netstat** 显示`tcp`、`udp`的`端口`和`进程`相关情况
+
+  ```shell
+  -t # tcp
+  -u # udp
+  -n # 拒绝显示别名，能显示数字的全部转化为数字
+  -i # 仅列出再Linsten的服务
+  -P # 显示建立相关链接的程序名
+  netstat -tunlp|grep 80 # 查看80端口情况
+  ```
+
++ **kill -9 PID** 杀死一个端口对应的进程
 
 ## 参考文章
 
-狂神说微信公众号：https://mp.weixin.qq.com/s/RT93qJdTagtKjWKx_A_6Nw
+**狂神说微信公众号**：https://mp.weixin.qq.com/s/RT93qJdTagtKjWKx_A_6Nw
 
 ## 常用总结
 
 ```shell
-cd [file]  #进入文件夹，可以说相对路径，也可以是绝对路径，更路径为 /
-ls [-l -a] #列出当前目录内容 [详细信息 全部文件]
-pwd		#显示当前目录
-mkdir [-p -m]	#创建新文件夹（目录） [递归创建 配置权限]
-rmdir [-p -f] #删除文件夹（目录） [-递归删除 -强行删除]
-cp [options] 源file 目标file #复制源文件到目标文件 [options见上方]
-rm [-r -f -i]      #删除文件或者目录  [递归删除 强行删除 互动删除]
-mv [-u -f -i] 源file 目标path  #移动源文件到目标文件  同一路径可以起到改文件名效果 [更新 强行覆盖 互动覆盖]
+cd [file]  # 进入文件夹，可以说相对路径，也可以是绝对路径，更路径为 /
+ls [-l -a] # 列出当前目录内容 [详细信息 全部文件]
+pwd		# 显示当前目录
+mkdir [-p -m]	# 创建新文件夹（目录） [递归创建 配置权限]
+rmdir [-p -f] # 删除文件夹（目录） [-递归删除 -强行删除]
+cp [options] 源file 目标file # 复制源文件到目标文件 [options见上方]
+rm [-r -f -i]      # 删除文件或者目录  [递归删除 强行删除 互动删除]
+mv [-u -f -i] 源file 目标path  # 移动源文件到目标文件  同一路径可以起到改文件名效果 [更新 强行覆盖 互动覆盖]
 
-cat filename  #由第一行开始显示文件内容
-nl 	filename  #显示行号
-more filename  #一页一页显示文件内容
-less filename	 #可以前后翻页
-head [-n number] filename #只看前n行 [-n 行数]
-tail [-n number] filename #只看后n行 [-n 行数]
+cat filename  # 由第一行开始显示文件内容
+nl 	filename  # 显示行号
+more filename  # 一页一页显示文件内容
+less filename	 # 可以前后翻页
+head [-n number] filename # 只看前n行 [-n 行数]
+tail [-n number] filename # 只看后n行 [-n 行数]
 
-ln f1 f2 	  #创建f1的一个硬连接文件f2
-ln -s f1 f3   #创建f1的一个符号连接文件f3
+ln f1 f2 	  # 创建f1的一个硬连接文件f2
+ln -s f1 f3   # 创建f1的一个符号连接文件f3
 ```
 
