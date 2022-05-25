@@ -87,11 +87,11 @@
 
 + **docker volume --help** 查看卷相关命令
 
-+ xxxxxxxxxx //定义数据表（集合的）映射   字段名和数据库保持一致var stuSchema = mongoose.Schema({  name: {    type:String,    maxlength:10,   //最大长度    minlength:2,    //最小长度    match:/^zh(.*)/i,    //正则，以zh开头    require:true   //必须  },  age: {    type:Number,    max:100,     //最大值（只能在Number)    min:0,      //最小值（只能在Number)    validate:function(age){    //自定义数据校验规则        return age % 2 === 0    }  },  status: {    type: Number,    default: "success",   //默认值    enum:[    //结果枚举 只能为 ‘success'或者'error'  (只能在String)        "success",        "error"    ]  }})js
-
 + **docker --volume-from** 数据卷容器，从另一个容器当中挂载容器中已经创建好的数据卷
 
 ## Dockerfile
+
++ **docker build .**    通过dockerfile构建镜像
 
 ```dockerfile
 FROM centos # 指定基础镜像
@@ -137,6 +137,33 @@ ENV MYPATH /etc/nginx # 构建的时候设置环境变量
   ```shell
   docker run --net 
   ```
+
+## Docker Compose
+
++ **docker-compose up** 执行docker-compose
+
++ **docker-compose down** 关闭docker-compose文件
+
++ **docker-compose.yml**
+
+  ```yaml
+  version: '3'
+  services:
+    web:
+      build: .
+      ports:
+       - "5000:5000"
+      volumes:
+       - logvolume01:/var/log
+      links:
+       - redis
+    redis:
+      image: redis
+  volumes:
+    logvolume01: {}
+  ```
+
+  
 
 ## 参考文章
 
