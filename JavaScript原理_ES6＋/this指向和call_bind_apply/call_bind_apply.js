@@ -62,13 +62,11 @@
 // let fn = log.bind()
 // console.log(fn(2))
 
-
-
 Function.prototype.myCall = function (context, ...args) {
   let ctx = context || window
   ctx.fn = this
   res = ctx.fn(...args)
-  Reflect.deleteProperty(ctx, 'fn')
+  Reflect.deleteProperty(ctx, "fn")
   return res
 }
 
@@ -84,7 +82,7 @@ function sayHi() {
 }
 
 let obj = {
-  name: 'zhansan'
+  name: "zhansan",
 }
 
 sayHi.myCall(obj)
