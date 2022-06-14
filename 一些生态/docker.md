@@ -164,8 +164,3 @@ ENV MYPATH /etc/nginx # 构建的时候设置环境变量
   ```
 
   
-
-## 参考文章
-
-[Docker基础篇_霸气小闫的博客-CSDN博客](https://blog.csdn.net/Mr_YanMingXin/article/details/119504925)
-
