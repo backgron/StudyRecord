@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .play-button {
+      }
+    </style>
+  </head>
+  <body>
+    <audio
+      id="audio"
+      controls
+      src="https://outbound.soboten.com//recordings/20220617/1353/0bc781c9-fde0-4afc-8213-73deecc8a2f5.mp3"
+    ></audio>
+    <button id="play" class="play-button">播放按钮</button>
+    <button id="voice" class="voice-button">静音按钮</button>
+    <progress id="progress" class="progress-bar"></progress>
+    <script>
+      let audio = document.querySelector("#audio")
+      let progress = document.querySelector("#progress")
+
+      setTimeout(() => {
+        console.log(audio.currentTime)
+        console.log(audio.duration)
+        progress.max = audio.duration
+        progress.value = 10
+      }, 1000)
+      audio.pause()
+
+      let playButton = document.querySelector("#play")
+      playButton.addEventListener("click", function (event) {
+        console.log("currentTime", audio.currentTime)
+        console.log("duration", audio.duration)
+        console.log(progress.position)
+        if (audio.paused) {
+          audio.play()
+        } else {
+          audio.pause()
+        }
+      })
+
+      let voiceButton = document.querySelector("#voice")
+      voiceButton.addEventListener("click", function (event) {
+        audio.muted = !audio.muted
+        console.log(audio.muted)
+      })
+    </script>
+  </body>
+</html>
