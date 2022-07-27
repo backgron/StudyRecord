@@ -177,6 +177,112 @@
   off() // 取消事件监听
   ```
 
+### Stream 模块
+
+- Node.js 中的流就是处理流式数据的抽象接口，继承EventEmitter类
+- 优势：无需一次性读取所有数据后放入内存后使用
+  + 时间效率：分段处理可以同时操作多个数据的chunk
+  + 空间效率：同一时间流无需占据大内存
+  + 使用方便：配合管道，灵活扩展
+
++ Nodejs中的流的分类
+  + Readable:可读流，实现数据的读取    (数据源)
+  + Writeable：可写流，实现数据的写    (数据消费)
+  + Duplex：双工流，可读可写
+  + Tranform：转换流，可读可写，还能实现数据转换加工
+
+#### Readable
+
++ 自定义Readable需要继承stream.Readable类，并实现_read方法，调用push生产数据
+
++ 事件监听
+  + readable事件：当流中存在可读取数据时触发
+  + data事件：当流中数据块传给消费者后触发
+  + end事件：数据被全部消费后触发
+
+#### Writable
+
++ 自定义Writable需要继承stream.Writable类,并实现_write方法，调用write消费数据
+
++ 事件监听
++ pipe事件：可读流调用pipe()方法时触发
++ unpipe事件：可读流调用unpipe()方法时触发
+
+#### Duplex
+
++ 自定义Duplex需要继承stream.Duplex类,并实现_read和_write方法
+
+#### Transform
+
++ 自定义Transform需要继承stream.Transform类,并重写_transform方法，调用push和callback。重写_flush方法，处理剩余数据。
+
+#### fs 中的Stream
+
+```js
+  // ReadStream 创建一个文件可读流
+  rs = fs.createReadStream('./test.txt',{
+    flags:'r',
+    mode:'438',
+    start:0,
+    ...
+  })
+
+  rs.on('data',(chunk)=>{})
+  rs.on('readable',()=>{
+    while((data=rs.read())!==null){
+      console.log(data.toString())
+    }
+  })
+  rs.on('open',(fd)=>{})
+  rs.on('close',()=>{})
+  rs.pause()  //切换到暂停状态
+  rs.resume() //切换到流动状态
+
+  // WriteStream 创建一个文件可写流
+  const ws = fs.createWriteStream('test2.txt',{
+    flags:'w',
+    mode:438,
+    encoding:'utf8',
+    start:0,
+    highWaterMark:3,
+  })
+
+  ws.write('写入一个数据') //当累计写入量>=水位线 会返回false
+  ws.on('open')
+  ws.on('close')
+  ws.on('drain') //  当ws.write的flage为false并且buffer中可以写入数据时，会触发drain事件，可以用来控制写入速度
+```
+
+
+
+
+### HTTP 模块
+
++ http模块实现了 EventEmitter 和 Stream模块的接口
++ 在http模块中，请求request和响应response都是流的形式
+  
+  ```js
+    //  启动一个服务端
+    const server = http.createServer((req,res)=>{})  //创建服务器对象
+    server.listen()  // 监听端口
+    server.on('request',(req,res)=>{ // 监听 request 请求事件
+    req.on('data',()=>{}) // 监听数据传输
+    req.on('end',()=>{ // 数据传输结束
+      res.end()  // 处理完成，返回响应
+    })
+    })
+
+    //启动一个客户端
+    const req = http.request(url,options,(res)=>{  // 创建一个请求对象
+      res.on('data',()=>{})  // 监听响应结果数据
+      res.on('end',()=>{}) // 数据传输完成
+    })
+    req.on('error',(err)=>{})  // 监听请求错误
+    req.write(params) // 写入求情参数 （post等）
+    req.end() // 请求完成，发送请求
+  ```
+
+
 ## 模块化
 
 ### Nodejs 与 CommonJS 规范
