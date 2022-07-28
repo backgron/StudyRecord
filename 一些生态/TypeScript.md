@@ -425,7 +425,9 @@
        "jsx": "react", // jsx 用于什么环境 
        "declaration": true,   // 创建 .d.ts 类型声明文件
        "outDir": "./",  // 编译后文件输出路径
+       "rootDir":"./src/components", //入口文件
        "moduleResolution": "node",  // 模块解析策略
+       "esModuleInterop": true, // 实现es和commonjs相互操作
    }
   ```
 
@@ -499,6 +501,11 @@
 
 
 ## 其他
+
+# 生态
+
++ tslint  
++ ts-node
 
 ### 练习：
 
