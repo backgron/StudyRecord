@@ -147,12 +147,14 @@ npm init
    ```shell
    npm publish
    ```
+   
+   **注意**：如果使用了镜像仓库可能会导致失败，需要切换到npm的官方仓库
 
 ## 使用
 
 + 按照日常使用`npm`的方法即可正常使用
 
-1. 创建项目useSelfNpm，初始化npm
+1. 创建项目`useSelfNpm`，初始化`npm`
 
    ```shell
    npm init
@@ -174,3 +176,45 @@ npm init
    ```
 
    注意：在使用`import`导入时记得去`package.json`加上`"type":"module"`
+
+# package.json
+
++ npm 项目的配置文件，一般放在项目的根目录中
+
+  ```json
+  {
+    "name": "my-project",   // 包名
+    "version": "1.5.0",   // 包的版本
+    "description": "",  // 描述
+    "keywords": []， // 关键字
+    "homepage":"url", // 项目主页
+    "main": "src/index.js",  // 入口文件
+    "module":"lib/index.js",  // ES版本的入口文件
+    "typings":"lib/index.d.ts", // 类型
+    "bin":{}, // 将某些可执行Javascript文件公开给父包的字段，npm执行命令执行的文件
+    "license":"" ,// 开源协议
+    "scripts": {  },// 脚本
+    "files":["dist/**/*","lib/**/*"], // 需要发布到NPM残酷的文件，可配合.npmignore使用
+    "dependencies": {  },// 生产依赖
+    "devDependencies": {  },// 开发环境依赖
+    "repository": {  // 仓库
+      "type": "git",
+      "url": "https://github.com/osiolabs/example.git"
+    },
+    "author": "", //作者
+    "browserslist":[], // 浏览器版本
+    "engines":{},// 模块运行的平台和版本
+    "private":true, //设置为私有仓库
+    "type":"commonjs", //模块化规范
+  }
+  ```
+
+  + 扩展
+
+    ```json
+    "gitHooks":{}  //git 生命周期钩子
+    ```
+
+    
+
+  
