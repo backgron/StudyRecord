@@ -186,6 +186,7 @@ npm init
     "name": "my-project",   // 包名
     "version": "1.5.0",   // 包的版本
     "description": "",  // 描述
+    "workspaces": [], //工作空间
     "keywords": []， // 关键字
     "homepage":"url", // 项目主页
     "main": "src/index.js",  // 入口文件
@@ -208,13 +209,14 @@ npm init
     "type":"commonjs", //模块化规范
   }
   ```
-
+  
   + 扩展
-
+  
     ```json
     "gitHooks":{}  //git 生命周期钩子
     ```
 
-    
 
-  
+# 生态
+
++ inquirer:‎常见交互式命令行用户界面的集合。
