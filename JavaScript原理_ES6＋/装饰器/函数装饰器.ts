@@ -1,0 +1,3 @@
+function isVipDec() {
+  return function () {}
+}
