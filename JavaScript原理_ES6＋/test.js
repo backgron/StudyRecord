@@ -1,4 +1,7 @@
-let strFn = "(function name() {console.log('执行了')})()"
-
-let fn = new Function(strFn)
+const fn = () => {
+  Promise.resolve().then(() => {
+    fn()
+    console.log(1)
+  })
+}
 fn()
