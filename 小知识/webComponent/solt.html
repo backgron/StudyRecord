@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <template id="my-paragraph">
+      <style>
+        p {
+          color: white;
+          background-color: #666;
+          padding: 5px;
+        }
+      </style>
+      <div><span id="label"></span>：<slot name="form-item"></slot></div>
+    </template>
+
+    <form-item label="姓名">
+      <input slot="form-item" />
+    </form-item>
+
+    <form-item label="日期">
+      <input type="date" slot="form-item" />
+    </form-item>
+
+    <script>
+      customElements.define(
+        "form-item",
+        class extends HTMLElement {
+          constructor() {
+            super()
+
+            const template = document.querySelector("#my-paragraph")
+            let templateContent = template.content
+
+            const shadow = this.attachShadow({ mode: "open" })
+            shadow.appendChild(templateContent.cloneNode(true))
+            // shadow.appendChild(templateContent)
+
+            const span = shadow.querySelector("#label")
+            span.innerHTML = this.getAttribute("label")
+            console.log(span.innerHTML)
+          }
+        }
+      )
+    </script>
+  </body>
+</html>

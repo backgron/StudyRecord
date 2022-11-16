@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <template id="my-paragraph">
+      <style>
+        p {
+          color: red;
+        }
+      </style>
+      <p>My paragraph</p>
+    </template>
+
+    <div id="box">把段落放在这里:</div>
+
+    <script>
+      const template = document.querySelector("#my-paragraph")
+      console.log(template)
+      let templateContent = template.content
+      console.log(templateContent)
+
+      const div = document.querySelector("#box")
+      div.appendChild(templateContent)
+    </script>
+  </body>
+</html>
