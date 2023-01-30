@@ -4,13 +4,13 @@
 
 + **systemctl start docker**  启动docker
 + **docker version**  查看版本
-+ **systemctl enable docker ** 开机自启动
++ **systemctl enable docker** 开机自启动
 + **docker info** 查看系统信息
 
 ##  镜像命令
 
 + **docker images**  查看所有镜像
-+ **docker search ** 搜索镜像
++ **docker search** 搜索镜像
 + **docker pull [imageName:tag]** 下载镜像
 + **docker rmi [-f] [imageId]** 删除镜像 [强制删除]
 
@@ -164,3 +164,38 @@ ENV MYPATH /etc/nginx # 构建的时候设置环境变量
   ```
 
   
+
+
+## 搭建docker私服
+
+### 安装官方私有仓库镜像
+```shell
+  docker run -d \
+  -p 5000:5000 \
+  -v /usr/local/registry:/var/lib/registry \
+  registry
+```
+### 配置客户端
+``` shell
+  vim /usr/lib/systemd/system/docker.service
+
+  在 ExecStart= 后面添加 --insecure-registry ip：5000
+
+  vim /etc/docker/daemon.conf 添加如下内容：
+  {
+    "insecure-registries":["xxxxip:5000"]
+  }
+```
+### 重启docker服务
+```shell
+  systemctl daemon-reload
+  systemctl restart docker
+```
+注意重启docker服务后重启私有仓库的容器
+
+### 推送
+docker tag IMAGE 服务器ip:端口/IMAGE_NAME
+docker push 服务器ip:端口/IMAGE_NAME
+
+### 拉取
+docker pull 服务器ip:端口/IMAGE_NAME
