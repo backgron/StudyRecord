@@ -19,7 +19,7 @@
 
 ### unknow
 
-+ 
++ 位置属性。与 any 类型不同，unknown 类型在使用时更加严格，因为 TypeScript 不允许直接对 unknown 类型的值进行任何操作，除非先进行类型检查或类型断言。这是为了确保程序在处理未知值时不会出现意外的行为。
 
 ### 联合类型 A | B
 
@@ -33,13 +33,27 @@
 
 ### keyof
 
++ keyof 接口的签名数组 类似Object.
+
 ### extends
+
++ extends 产生 三元表达式的条件、遍历联合类型
 
 ### in
 
++ in 遍历 接口的值，类似for in
+
 ### infer
 
++ infer 暂定类型变量，类似var
+
 ### typeof
+
++ 获取一个值的类型信息
+
+## 数组类型
+
++ T[number] 遍历数组
 
 ## 语法
 
