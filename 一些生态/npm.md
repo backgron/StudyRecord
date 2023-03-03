@@ -191,7 +191,7 @@ npm init
     "homepage":"url", // 项目主页
     "main": "src/index.js",  // 入口文件
     "module":"lib/index.js",  // ES版本的入口文件
-    "typings":"lib/index.d.ts", // 类型
+    "typings":"lib/index.d.ts", // 类型文件
     "bin":{}, // 将某些可执行Javascript文件公开给父包的字段，npm执行命令执行的文件
     "license":"" ,// 开源协议
     "scripts": {  },// 脚本
@@ -207,6 +207,9 @@ npm init
     "engines":{},// 模块运行的平台和版本
     "private":true, //设置为私有仓库
     "type":"commonjs", //模块化规范
+    "overrides":{    //重写，限制某个包的版本
+    "coa":"2.0.2"
+    }
   }
   ```
   
