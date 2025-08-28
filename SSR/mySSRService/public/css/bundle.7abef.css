@@ -1,0 +1,118 @@
+/*!*********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/assets/global.css ***!
+  \*********************************************************************************************************************************************************/
+body{
+  padding:50px;
+  backgronund-color:#f0f0f0;
+}
+
+/*!******************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/components/Title/index.css ***!
+  \******************************************************************************************************************************************************************/
+h1{
+  color: red;
+}
+
+.index__btn__JYjWM{
+  background-color: blue;
+  color: white;
+  border:none;
+  padding:10px 20px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/*!************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/components/AdminHeader/index.css ***!
+  \************************************************************************************************************************************************************************/
+/* // 路由导航栏
+import style from './index.css'
+
+const Header = () => {
+  return (
+    <header className={style.header}>
+      <nav>
+        <ul className={style.navList}>
+          <li className={style.navItem}>
+            <Link to="/">Home</Link>
+          </li>
+          <li className={style.navItem}>
+            <Link to="/movies">Movies</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  )
+}
+
+export default Header */
+
+
+.index__header__H2Kam {
+  background-color: #333;
+  padding: 10px 20px;
+}
+.index__navList__dMcPh {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+.index__navItem__Rhm_b a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+.index__navItem__Rhm_b a:hover {
+  text-decoration: underline;
+}
+
+/*!*******************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/components/Header/index.css ***!
+  \*******************************************************************************************************************************************************************/
+/* // 路由导航栏
+import style from './index.css'
+
+const Header = () => {
+  return (
+    <header className={style.header}>
+      <nav>
+        <ul className={style.navList}>
+          <li className={style.navItem}>
+            <Link to="/">Home</Link>
+          </li>
+          <li className={style.navItem}>
+            <Link to="/movies">Movies</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  )
+}
+
+export default Header */
+
+
+.index__header__bLsG0 {
+  background-color: #333;
+  padding: 10px 20px;
+}
+.index__navList___y7A0 {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+.index__navItem__y51a_ a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+.index__navItem__y51a_ a:hover {
+  text-decoration: underline;
+}
+
+
+/*# sourceMappingURL=bundle.7abef.css.map*/
